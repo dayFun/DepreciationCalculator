@@ -1,6 +1,8 @@
 package view;
 
-import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -38,36 +40,71 @@ public class DepMetricsPanel extends JPanel {
     }
 
     private void initLayout() {
-        JPanel labelsPanel = layoutLabels();
-        JPanel textFieldsPanel = layoutTextFields();
+        GridBagLayout gridBagLayout = new GridBagLayout();
+        setLayout(gridBagLayout);
+        GridBagConstraints gc = new GridBagConstraints();
 
-        add(labelsPanel);
-        add(textFieldsPanel);
+        gc.weightx = 0;
+        gc.weighty = 0;
+        gc.fill = GridBagConstraints.HORIZONTAL;
 
-    }
+        gc.gridx = 0;
+        gc.gridy = 0;
+        gc.insets = new Insets(75, 50, 5, 20);
+        gc.anchor = GridBagConstraints.PAGE_START;
 
-    private JPanel layoutLabels() {
-        JPanel labelsPanel = new JPanel();
-        labelsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        add(assetNameLabel, gc);
 
-        labelsPanel.add(assetNameLabel);
-        labelsPanel.add(costLabel);
-        labelsPanel.add(salvageValueLabel);
-        labelsPanel.add(lifeYearsLabel);
+        gc.gridx = 1;
+        gc.gridy = 0;
+        gc.insets = new Insets(75, 20, 5, 20);
 
-        return labelsPanel;
-    }
+        add(costLabel, gc);
 
-    private JPanel layoutTextFields() {
-        JPanel fieldsPanel = new JPanel();
-        fieldsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        gc.gridx = 2;
+        gc.gridy = 0;
+        gc.insets = new Insets(75, 20, 5, 20);
 
-        fieldsPanel.add(assetField);
-        fieldsPanel.add(costField);
-        fieldsPanel.add(salvageValueField);
-        fieldsPanel.add(lifeYearsField);
-        fieldsPanel.add(clearButton);
+        add(salvageValueLabel, gc);
 
-        return fieldsPanel;
+        gc.gridx = 3;
+        gc.gridy = 0;
+        gc.insets = new Insets(75, 20, 5, 20);
+
+        add(lifeYearsLabel, gc);
+
+        gc.gridheight = 2;
+        gc.gridx = 4;
+        gc.gridy = 0;
+        gc.insets = new Insets(90, 0, 0, 0);
+
+        add(clearButton, gc);
+
+        gc.weightx = 0;
+        gc.weighty = 1;
+
+        gc.gridx = 0;
+        gc.gridy = 1;
+        gc.insets = new Insets(0, 50, 0, 20);
+
+        add(assetField, gc);
+
+        gc.gridx = 1;
+        gc.gridy = 1;
+        gc.insets = new Insets(0, 20, 0, 20);
+
+        add(costField, gc);
+
+        gc.gridx = 2;
+        gc.gridy = 1;
+        gc.insets = new Insets(0, 20, 0, 20);
+
+        add(salvageValueField, gc);
+
+        gc.gridx = 3;
+        gc.gridy = 1;
+        gc.insets = new Insets(0, 20, 0, 20);
+
+        add(lifeYearsField, gc);
     }
 }
