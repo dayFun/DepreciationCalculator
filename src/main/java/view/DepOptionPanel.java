@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -13,18 +14,20 @@ public class DepOptionPanel extends JPanel {
     private static final long serialVersionUID = 222350806862423649L;
 
     private JLabel depTypeLabel;
+    private ButtonGroup depTypeButtonGroup;
     private JRadioButton straightLineRButton;
     private JRadioButton doubleDecliningRButton;
 
     public DepOptionPanel() {
         setLayout(new GridBagLayout());
-        // setMaximumSize(new Dimension(100, 100));
-        setSize(100, 100);
 
         depTypeLabel = new JLabel("Depreciation Type:");
-
         straightLineRButton = new JRadioButton("Straight Line");
         doubleDecliningRButton = new JRadioButton("Double Declining");
+
+        depTypeButtonGroup = new ButtonGroup();
+        depTypeButtonGroup.add(straightLineRButton);
+        depTypeButtonGroup.add(doubleDecliningRButton);
 
         GridBagConstraints gc = new GridBagConstraints();
 
