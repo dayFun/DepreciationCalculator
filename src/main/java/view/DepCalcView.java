@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -14,12 +15,14 @@ public class DepCalcView extends JFrame {
 
     private DepMetricsPanel depMetricsPanel;
     private DepOptionPanel depOptionPanel;
+    private DepTablePanel depTablePanel;
     private JButton calculateButton;
 
     public DepCalcView() {
         depMetricsPanel = new DepMetricsPanel();
         depOptionPanel = new DepOptionPanel();
-
+        depTablePanel = new DepTablePanel();
+        depTablePanel.setPreferredSize(new Dimension(300, 300));
         calculateButton = new JButton("Calculate");
 
         initLayout();
@@ -50,7 +53,14 @@ public class DepCalcView extends JFrame {
         gc.gridx = 0;
         gc.gridy = 2;
         gc.anchor = GridBagConstraints.CENTER;
+        gc.insets = new Insets(0, 0, 0, 0);
         add(calculateButton, gc);
+
+        gc.anchor = GridBagConstraints.CENTER;
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        gc.gridx = 0;
+        gc.gridy = 3;
+        add(depTablePanel, gc);
     }
 
     private void setWeights(GridBagConstraints gc, int x, int y) {
