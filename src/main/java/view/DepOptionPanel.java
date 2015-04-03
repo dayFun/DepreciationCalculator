@@ -29,9 +29,12 @@ public class DepOptionPanel extends JPanel {
         depTypeButtonGroup.add(straightLineRButton);
         depTypeButtonGroup.add(doubleDecliningRButton);
 
+        initLayout();
+    }
+
+    private void initLayout() {
         GridBagConstraints gc = new GridBagConstraints();
 
-        gc.anchor = GridBagConstraints.CENTER;
         gc.gridwidth = 2;
         gc.gridheight = 1;
 

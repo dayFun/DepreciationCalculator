@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 
@@ -13,11 +14,13 @@ public class DepCalcView extends JFrame {
 
     private DepMetricsPanel depMetricsPanel;
     private DepOptionPanel depOptionPanel;
+    private JButton calculateButton;
 
     public DepCalcView() {
         depMetricsPanel = new DepMetricsPanel();
         depOptionPanel = new DepOptionPanel();
 
+        calculateButton = new JButton("Calculate");
 
         initLayout();
         setWindowOptions();
@@ -27,24 +30,32 @@ public class DepCalcView extends JFrame {
         setLayout(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
 
-        gc.weightx = 0;
-        gc.weighty = 0;
+        setWeights(gc, 0, 0);
 
         gc.gridx = 0;
         gc.gridy = 0;
-        gc.anchor = GridBagConstraints.NORTH;
+        gc.anchor = GridBagConstraints.FIRST_LINE_START;
         gc.insets = new Insets(25, 0, 25, 0);
 
         add(depMetricsPanel, gc);
 
-
-        gc.weightx = 2;
-        gc.weighty = 1;
-
         gc.gridx = 0;
         gc.gridy = 1;
+        gc.anchor = GridBagConstraints.CENTER;
         gc.insets = new Insets(0, 0, 0, 0);
         add(depOptionPanel, gc);
+
+        setWeights(gc, 0, 1);
+
+        gc.gridx = 0;
+        gc.gridy = 2;
+        gc.anchor = GridBagConstraints.CENTER;
+        add(calculateButton, gc);
+    }
+
+    private void setWeights(GridBagConstraints gc, int x, int y) {
+        gc.weightx = x;
+        gc.weighty = y;
     }
 
     private void setWindowOptions() {

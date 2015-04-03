@@ -50,33 +50,33 @@ public class DepMetricsPanel extends JPanel {
 
         gc.gridx = 0;
         gc.gridy = 0;
-        gc.insets = new Insets(75, 50, 5, 20);
+        gc.insets = new Insets(50, 50, 5, 20);
         gc.anchor = GridBagConstraints.PAGE_START;
 
         add(assetNameLabel, gc);
 
         gc.gridx = 1;
         gc.gridy = 0;
-        gc.insets = new Insets(75, 20, 5, 20);
+        gc.insets = new Insets(50, 20, 5, 20);
 
         add(costLabel, gc);
 
         gc.gridx = 2;
         gc.gridy = 0;
-        gc.insets = new Insets(75, 20, 5, 20);
+        gc.insets = new Insets(50, 20, 5, 20);
 
         add(salvageValueLabel, gc);
 
         gc.gridx = 3;
         gc.gridy = 0;
-        gc.insets = new Insets(75, 20, 5, 20);
+        gc.insets = new Insets(50, 20, 5, 20);
 
         add(lifeYearsLabel, gc);
 
         gc.gridheight = 2;
         gc.gridx = 4;
         gc.gridy = 0;
-        gc.insets = new Insets(90, 0, 0, 0);
+        gc.insets = new Insets(65, 0, 0, 0);
 
         add(clearButton, gc);
 
