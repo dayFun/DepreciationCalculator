@@ -12,13 +12,17 @@ import javax.swing.JFrame;
 public class DepCalcView extends JFrame {
 
     private static final long serialVersionUID = 1L;
-
+    private MainMenuBar menuBar;
     private DepMetricsPanel depMetricsPanel;
     private DepOptionPanel depOptionPanel;
     private DepTablePanel depTablePanel;
     private JButton calculateButton;
 
     public DepCalcView() {
+
+        menuBar = new MainMenuBar();
+        setJMenuBar(menuBar);
+
         depMetricsPanel = new DepMetricsPanel();
         depOptionPanel = new DepOptionPanel();
         depTablePanel = new DepTablePanel();
