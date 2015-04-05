@@ -1,7 +1,6 @@
-package model;
+package depCalc.model;
 
 public class Asset {
-
     // A method called getBegBal(y,m) which returns the beginning balance for year y using method m,
     // where m is either S for straight-line or D for double-declining.
     // A property called getEndBal(y,m) which returns the ending balance for year y using method m.
@@ -15,11 +14,15 @@ public class Asset {
     private double salvageValue;
     private int life;
 
+    public Asset() {
+        this("", 0.0, 0.0, 0);
+    }
+
     public Asset(String name, double cost, double salvageValue, int life) {
         this.name = name;
-        this.cost = cost;
-        this.salvageValue = salvageValue;
-        this.life = life;
+        setCost(cost);
+        setSalvageValue(salvageValue);
+        setLife(life);
     }
 
     public double getAnnualDep() {
@@ -33,15 +36,19 @@ public class Asset {
             depreciation = presentValue * DOUBLE_DECLINING_RATE;
             if (presentValue <= salvageValue) {
                 depreciation = 0;
-                break;
             } else if (presentValue - depreciation < salvageValue) {
                 depreciation = presentValue - salvageValue;
             }
 
-            if (depreciation != 0 && shouldSwitchToStaightLineDep(depreciation, presentValue)) {
-                depreciation = getAnnualDep();
-            }
+            depreciation = extracted(presentValue, depreciation);
             presentValue = presentValue - depreciation;
+        }
+        return depreciation;
+    }
+
+    private double extracted(double presentValue, double depreciation) {
+        if (depreciation != 0 && shouldSwitchToStaightLineDep(depreciation, presentValue)) {
+            depreciation = getAnnualDep();
         }
         return depreciation;
     }
@@ -64,5 +71,49 @@ public class Asset {
         double straightLineDep = getAnnualDep();
 
         return (depreciation < straightLineDep) && (presentValue - straightLineDep > salvageValue);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        if (cost >= 0) {
+            this.cost = cost;
+        } else {
+            throw new IllegalArgumentException("Cost cannot be less than zero.");
+        }
+    }
+
+    public double getSalvageValue() {
+        return salvageValue;
+    }
+
+    public void setSalvageValue(double salvageValue) {
+        if (salvageValue >= 0) {
+            this.salvageValue = salvageValue;
+        } else {
+            throw new IllegalArgumentException("Salvage value cannot be less than zero.");
+        }
+    }
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        if (life >= 0) {
+            this.life = life;
+        } else {
+            throw new IllegalArgumentException("Life years left cannot be less than zero.");
+        }
     }
 }

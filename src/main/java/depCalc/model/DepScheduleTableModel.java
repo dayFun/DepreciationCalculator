@@ -1,4 +1,4 @@
-package model;
+package depCalc.model;
 
 import javax.swing.table.AbstractTableModel;
 

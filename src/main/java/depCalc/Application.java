@@ -2,7 +2,7 @@ package depCalc;
 
 import java.awt.EventQueue;
 
-import view.DepCalcView;
+import depCalc.view.DepCalcView;
 
 public class Application {
     public static void main(String[] args) {
@@ -10,11 +10,9 @@ public class Application {
             @Override
             public void run() {
                 DepCalcView depCalcView = new DepCalcView();
-
                 depCalcView.setVisible(true);
             }
         });
     }
-
 
 }

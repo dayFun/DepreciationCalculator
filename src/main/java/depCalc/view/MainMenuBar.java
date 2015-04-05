@@ -1,4 +1,4 @@
-package view;
+package depCalc.view;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;

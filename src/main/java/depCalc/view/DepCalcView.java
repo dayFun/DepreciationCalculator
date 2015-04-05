@@ -1,4 +1,4 @@
-package view;
+package depCalc.view;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;

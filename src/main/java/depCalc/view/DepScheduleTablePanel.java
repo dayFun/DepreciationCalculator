@@ -1,4 +1,4 @@
-package view;
+package depCalc.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import model.DepScheduleTableModel;
+import depCalc.model.DepScheduleTableModel;
 
 public class DepScheduleTablePanel extends JPanel {
 
