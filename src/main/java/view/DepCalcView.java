@@ -15,7 +15,7 @@ public class DepCalcView extends JFrame {
     private MainMenuBar menuBar;
     private DepMetricsPanel depMetricsPanel;
     private DepOptionPanel depOptionPanel;
-    private DepTablePanel depTablePanel;
+    private DepScheduleTablePanel depTablePanel;
     private JButton calculateButton;
 
     public DepCalcView() {
@@ -25,7 +25,7 @@ public class DepCalcView extends JFrame {
 
         depMetricsPanel = new DepMetricsPanel();
         depOptionPanel = new DepOptionPanel();
-        depTablePanel = new DepTablePanel();
+        depTablePanel = new DepScheduleTablePanel();
         depTablePanel.setPreferredSize(new Dimension(300, 300));
         calculateButton = new JButton("Calculate");
 

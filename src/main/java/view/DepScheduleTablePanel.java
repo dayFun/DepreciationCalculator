@@ -8,16 +8,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import model.DepreciationTableModel;
+import model.DepScheduleTableModel;
 
-public class DepTablePanel extends JPanel {
+public class DepScheduleTablePanel extends JPanel {
 
     private static final long serialVersionUID = -8681869005309787613L;
     private JTable table;
-    private DepreciationTableModel depTableModel;
+    private DepScheduleTableModel depTableModel;
 
-    public DepTablePanel() {
-        depTableModel = new DepreciationTableModel();
+    public DepScheduleTablePanel() {
+        depTableModel = new DepScheduleTableModel();
         table = new JTable(depTableModel);
 
         table.setBorder(BorderFactory.createLineBorder(Color.BLACK));

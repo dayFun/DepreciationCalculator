@@ -2,7 +2,7 @@ package model;
 
 import javax.swing.table.AbstractTableModel;
 
-public class DepreciationTableModel extends AbstractTableModel {
+public class DepScheduleTableModel extends AbstractTableModel {
 
     private static final long serialVersionUID = -7010312622673643462L;
 
