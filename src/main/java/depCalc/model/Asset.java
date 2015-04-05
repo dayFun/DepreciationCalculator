@@ -39,19 +39,12 @@ public class Asset {
             } else if (presentValue - depreciation < salvageValue) {
                 depreciation = presentValue - salvageValue;
             }
-
-            depreciation = extracted(presentValue, depreciation);
+            depreciation = switchToStraightLineDepIfNecessary(presentValue, depreciation);
             presentValue = presentValue - depreciation;
         }
         return depreciation;
     }
 
-    private double extracted(double presentValue, double depreciation) {
-        if (depreciation != 0 && shouldSwitchToStaightLineDep(depreciation, presentValue)) {
-            depreciation = getAnnualDep();
-        }
-        return depreciation;
-    }
 
     public double getBeginningBalance(int year, char depreciationMethod) {
         double beginningBalance = cost;
@@ -67,10 +60,18 @@ public class Asset {
         return beginningBalance;
     }
 
-    private boolean shouldSwitchToStaightLineDep(double depreciation, double presentValue) {
-        double straightLineDep = getAnnualDep();
-
-        return (depreciation < straightLineDep) && (presentValue - straightLineDep > salvageValue);
+    public double getEndingBalance(int year, char depreciationMethod) {
+        double endingBalance = cost;
+        if (depreciationMethod == STRAIGHT_LINE_DEP) {
+            for (int i = 1; i <= year; i++) {
+                endingBalance = endingBalance - getAnnualDep();
+            }
+        } else if (depreciationMethod == DOUBLE_DECLINE_DEP) {
+            for (int i = 1; i <= year; i++) {
+                endingBalance = endingBalance - getAnnualDep(i);
+            }
+        }
+        return endingBalance;
     }
 
     public String getName() {
@@ -115,5 +116,18 @@ public class Asset {
         } else {
             throw new IllegalArgumentException("Life years left cannot be less than zero.");
         }
+    }
+
+    private double switchToStraightLineDepIfNecessary(double presentValue, double depreciation) {
+        if (depreciation != 0 && shouldSwitchToStaightLineDep(depreciation, presentValue)) {
+            depreciation = getAnnualDep();
+        }
+        return depreciation;
+    }
+
+    private boolean shouldSwitchToStaightLineDep(double depreciation, double presentValue) {
+        double straightLineDep = getAnnualDep();
+
+        return (depreciation < straightLineDep) && (presentValue - straightLineDep > salvageValue);
     }
 }

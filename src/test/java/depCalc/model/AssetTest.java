@@ -7,8 +7,6 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import depCalc.model.Asset;
-
 public class AssetTest {
 
     private Asset asset;
@@ -56,5 +54,25 @@ public class AssetTest {
     @Test
     public void testGetBeginningBalanceAtFiveYearsWithDoubleDeclineDep() throws Exception {
         assertThat(asset.getBeginningBalance(5, 'D'), is(equalTo(5000.0)));
+    }
+
+    @Test
+    public void testGetEndingBalanceForStraightLineDepAfterOneYear() throws Exception {
+        assertThat(asset.getEndingBalance(1, 'S'), is(equalTo(25000.0)));
+    }
+
+    @Test
+    public void testGetEndingBalanceForStraightLineDepAfterFiveYears() throws Exception {
+        assertThat(asset.getEndingBalance(5, 'S'), is(equalTo(5000.0)));
+    }
+
+    @Test
+    public void testGetEndingBalanceForDoubleDeclineDepAfterOneYear() throws Exception {
+        assertThat(asset.getEndingBalance(1, 'D'), is(equalTo(18000.0)));
+    }
+
+    @Test
+    public void testGetEndingBalanceForDoubleDeclineDepAfterFiveYears() throws Exception {
+        assertThat(asset.getEndingBalance(5, 'D'), is(equalTo(5000.0)));
     }
 }
