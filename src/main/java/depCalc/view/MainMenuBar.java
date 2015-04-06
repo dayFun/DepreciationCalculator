@@ -20,4 +20,8 @@ public class MainMenuBar extends JMenuBar {
         add(helpMenu);
     }
 
+    public JMenuItem getExitMenuItem() {
+        return exitMenuItem;
+    }
+
 }

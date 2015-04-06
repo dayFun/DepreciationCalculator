@@ -4,9 +4,14 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+
+import depCalc.listeners.IAssetEntryListener;
+import depCalc.model.Asset;
 
 
 public class DepCalcView extends JFrame {
@@ -31,6 +36,22 @@ public class DepCalcView extends JFrame {
 
         initLayout();
         setWindowOptions();
+    }
+
+    public void attachListeners(final IAssetEntryListener viewListener) {
+        menuBar.getExitMenuItem().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewListener.handleExitButtonClicked();
+            }
+        });
+
+        calculateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Asset newAsset = depMetricsPanel.createAssetFromTextFields();
+            }
+        });
     }
 
     private void initLayout() {

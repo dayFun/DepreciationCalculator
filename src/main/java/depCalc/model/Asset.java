@@ -1,9 +1,6 @@
 package depCalc.model;
 
 public class Asset {
-    // A method called getBegBal(y,m) which returns the beginning balance for year y using method m,
-    // where m is either S for straight-line or D for double-declining.
-    // A property called getEndBal(y,m) which returns the ending balance for year y using method m.
 
     private static final char STRAIGHT_LINE_DEP = 'S';
     private static final char DOUBLE_DECLINE_DEP = 'D';
@@ -22,7 +19,7 @@ public class Asset {
         this.name = name;
         setCost(cost);
         setSalvageValue(salvageValue);
-        setLife(life);
+        setLifeYearsLeft(life);
     }
 
     public double getAnnualDep() {
@@ -39,6 +36,7 @@ public class Asset {
             } else if (presentValue - depreciation < salvageValue) {
                 depreciation = presentValue - salvageValue;
             }
+
             depreciation = switchToStraightLineDepIfNecessary(presentValue, depreciation);
             presentValue = presentValue - depreciation;
         }
@@ -106,11 +104,11 @@ public class Asset {
         }
     }
 
-    public int getLife() {
+    public int getLifeYearsLeft() {
         return life;
     }
 
-    public void setLife(int life) {
+    public void setLifeYearsLeft(int life) {
         if (life >= 0) {
             this.life = life;
         } else {

@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import depCalc.model.Asset;
+
 public class DepMetricsPanel extends JPanel {
 
     private static final long serialVersionUID = -4104415642801279530L;
@@ -17,10 +19,10 @@ public class DepMetricsPanel extends JPanel {
     private JLabel costLabel;
     private JLabel salvageValueLabel;
     private JLabel lifeYearsLabel;
-    private JTextField assetField;
-    private JTextField costField;
-    private JTextField salvageValueField;
-    private JTextField lifeYearsField;
+    private JTextField assetName;
+    private JTextField assetCost;
+    private JTextField assetSalvageValue;
+    private JTextField assetLifeYearsLeft;
     private JButton clearButton;
 
     public DepMetricsPanel() {
@@ -29,14 +31,49 @@ public class DepMetricsPanel extends JPanel {
         salvageValueLabel = new JLabel("Salvage Value:");
         lifeYearsLabel = new JLabel("Life (years):");
 
-        assetField = new JTextField(10);
-        costField = new JTextField(10);
-        salvageValueField = new JTextField(10);
-        lifeYearsField = new JTextField(10);
+        assetName = new JTextField(10);
+
+        assetCost = new JTextField(10);
+        assetCost.setName("JTF Cost");
+
+        assetSalvageValue = new JTextField(10);
+        assetSalvageValue.setName("JTF Salvage");
+
+        assetLifeYearsLeft = new JTextField(10);
+        assetLifeYearsLeft.setName("JTF Life");
 
         clearButton = new JButton("Clear");
 
         initLayout();
+    }
+
+    public Asset createAssetFromTextFields() {
+        Asset asset = new Asset();
+        asset.setName(assetName.getText());
+        asset.setCost(Double.valueOf(assetCost.getText()));
+        asset.setSalvageValue((Double.valueOf(assetSalvageValue.getText())));
+        asset.setLifeYearsLeft(Integer.valueOf(assetLifeYearsLeft.getText()));
+        return asset;
+    }
+
+    public JTextField getAssetName() {
+        return assetName;
+    }
+
+    public JTextField getAssetCost() {
+        return assetCost;
+    }
+
+    public JTextField getAssetSalvageValue() {
+        return assetSalvageValue;
+    }
+
+    public JTextField getAssetLifeYears() {
+        return assetLifeYearsLeft;
+    }
+
+    public JButton getClearButton() {
+        return clearButton;
     }
 
     private void initLayout() {
@@ -87,24 +124,24 @@ public class DepMetricsPanel extends JPanel {
         gc.gridy = 1;
         gc.insets = new Insets(0, 50, 0, 20);
 
-        add(assetField, gc);
+        add(assetName, gc);
 
         gc.gridx = 1;
         gc.gridy = 1;
         gc.insets = new Insets(0, 20, 0, 20);
 
-        add(costField, gc);
+        add(assetCost, gc);
 
         gc.gridx = 2;
         gc.gridy = 1;
         gc.insets = new Insets(0, 20, 0, 20);
 
-        add(salvageValueField, gc);
+        add(assetSalvageValue, gc);
 
         gc.gridx = 3;
         gc.gridy = 1;
         gc.insets = new Insets(0, 20, 0, 20);
 
-        add(lifeYearsField, gc);
+        add(assetLifeYearsLeft, gc);
     }
 }
