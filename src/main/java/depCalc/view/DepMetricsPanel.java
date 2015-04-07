@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import depCalc.model.Asset;
+import depCalc.utils.DoubleVerifier;
+import depCalc.utils.IntegerVerifier;
 
 public class DepMetricsPanel extends JPanel {
 
@@ -24,8 +26,13 @@ public class DepMetricsPanel extends JPanel {
     private JTextField assetSalvageValue;
     private JTextField assetLifeYearsLeft;
     private JButton clearButton;
+    private DoubleVerifier doubleVerifier;
+    private IntegerVerifier intVerifier;
 
     public DepMetricsPanel() {
+        doubleVerifier = new DoubleVerifier();
+        intVerifier = new IntegerVerifier();
+
         assetNameLabel = new JLabel("Asset Name:");
         costLabel = new JLabel("Cost:");
         salvageValueLabel = new JLabel("Salvage Value:");
@@ -49,11 +56,17 @@ public class DepMetricsPanel extends JPanel {
 
     public Asset createAssetFromTextFields() {
         Asset asset = new Asset();
-        asset.setName(assetName.getText());
-        asset.setCost(Double.valueOf(assetCost.getText()));
-        asset.setSalvageValue((Double.valueOf(assetSalvageValue.getText())));
-        asset.setLifeYearsLeft(Integer.valueOf(assetLifeYearsLeft.getText()));
+        if (validateUserInputer()) {
+            asset.setName(assetName.getText());
+            asset.setCost(Double.valueOf(assetCost.getText()));
+            asset.setSalvageValue((Double.valueOf(assetSalvageValue.getText())));
+            asset.setLifeYearsLeft(Integer.valueOf(assetLifeYearsLeft.getText()));
+        }
         return asset;
+    }
+
+    private boolean validateUserInputer() {
+        return doubleVerifier.verify(assetCost) && doubleVerifier.verify(assetSalvageValue) && intVerifier.verify(assetLifeYearsLeft);
     }
 
     public JTextField getAssetName() {

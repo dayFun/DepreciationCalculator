@@ -10,12 +10,12 @@ import depCalc.view.DepMetricsPanel;
 public class AssetMetricsInputVerifierTest2 {
 
     private DepMetricsPanel depMetricsPanel;
-    private AssetMetricsInputerVerifier verifier;
+    private DoubleVerifier verifier;
 
     @Before
     public void setup() {
         depMetricsPanel = new DepMetricsPanel();
-        verifier = new AssetMetricsInputerVerifier(depMetricsPanel);
+        verifier = new DoubleVerifier(depMetricsPanel);
     }
 
     @Test

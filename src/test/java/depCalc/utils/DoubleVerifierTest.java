@@ -17,7 +17,7 @@ import org.mockito.MockitoAnnotations;
 import depCalc.view.DepMetricsPanel;
 
 
-public class AssetMetricsInputerVerifierTest {
+public class DoubleVerifierTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private DepMetricsPanel depMetricsPanel;
@@ -28,7 +28,7 @@ public class AssetMetricsInputerVerifierTest {
     @Mock
     private JTextField life;
 
-    private AssetMetricsInputerVerifier verifier;
+    private DoubleVerifier verifier;
 
     @Before
     public void setup() {
@@ -37,7 +37,7 @@ public class AssetMetricsInputerVerifierTest {
         when(depMetricsPanel.getAssetSalvageValue()).thenReturn(salvage);
         when(depMetricsPanel.getAssetLifeYears()).thenReturn(life);
 
-        verifier = new AssetMetricsInputerVerifier(depMetricsPanel);
+        verifier = new DoubleVerifier(depMetricsPanel);
 
         when(cost.getName()).thenReturn("JTF Cost");
         when(life.getName()).thenReturn("JTF Life");
