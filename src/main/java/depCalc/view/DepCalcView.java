@@ -9,9 +9,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import depCalc.listeners.IAssetEntryListener;
 import depCalc.model.Asset;
+import depCalc.utils.IValidationStatusListener;
 
 
 public class DepCalcView extends JFrame {
@@ -22,6 +24,7 @@ public class DepCalcView extends JFrame {
     private DepOptionPanel depOptionPanel;
     private DepScheduleTablePanel depTablePanel;
     private JButton calculateButton;
+    private JLabel errorMessageLabel;
 
     public DepCalcView() {
 
@@ -33,6 +36,7 @@ public class DepCalcView extends JFrame {
         depTablePanel = new DepScheduleTablePanel();
         depTablePanel.setPreferredSize(new Dimension(300, 300));
         calculateButton = new JButton("Calculate");
+        errorMessageLabel = new JLabel();
 
         initLayout();
         setWindowOptions();
@@ -50,6 +54,20 @@ public class DepCalcView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Asset newAsset = depMetricsPanel.createAssetFromTextFields();
+            }
+        });
+
+        depMetricsPanel.getInputValidator().setValidationStatusListener(new IValidationStatusListener() {
+            @Override
+            public void validationFailed(String message) {
+                errorMessageLabel.setText(message);
+                System.err.println(message);
+            }
+
+            @Override
+            public void validationPassed(String message) {
+                errorMessageLabel.setText(message);
+                System.err.println(message);
             }
         });
     }
@@ -86,6 +104,10 @@ public class DepCalcView extends JFrame {
         gc.gridx = 0;
         gc.gridy = 3;
         add(depTablePanel, gc);
+
+        gc.gridx = 0;
+        gc.gridy = 4;
+        add(errorMessageLabel, gc);
     }
 
     private void setWeights(GridBagConstraints gc, int x, int y) {

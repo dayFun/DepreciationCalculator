@@ -18,18 +18,23 @@ public class UserInputValidator extends InputVerifier {
             "You must enter a valid integer for the remaining life of the asset"};
 
     private String message = "";
-
-    @Override
-    public boolean shouldYieldFocus(JComponent input) {
-        return verify(input);
-
-    }
+    private IValidationStatusListener validationStatus;
 
     @Override
     public boolean verify(JComponent input) {
         JTextField textField = (JTextField) input;
-        // return (checkFieldsForEmptyString(textField) || checkFieldsForInvalidNumbers(textField));
-        return checkFieldsForInvalidNumbers(textField);
+        if (checkFieldsForInvalidNumbers(textField)) {
+            setMessage("");
+            validationStatus.validationPassed(message);
+            return true;
+        } else {
+            validationStatus.validationFailed(message);
+            return false;
+        }
+    }
+
+    public void setValidationStatusListener(IValidationStatusListener validationStatus) {
+        this.validationStatus = validationStatus;
     }
 
     public String getMessage() {

@@ -85,6 +85,10 @@ public class DepMetricsPanel extends JPanel {
         return clearButton;
     }
 
+    public UserInputValidator getInputValidator() {
+        return inputValidator;
+    }
+
     private void initLayout() {
         GridBagLayout gridBagLayout = new GridBagLayout();
         setLayout(gridBagLayout);
