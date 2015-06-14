@@ -15,9 +15,9 @@ public class AssetMetricsInputerVerifier extends InputVerifier {
     private int intValue;
 
     public AssetMetricsInputerVerifier(DepMetricsPanel depMetricsPanel) {
-        this.assetCost = depMetricsPanel.getAssetCost();
-        this.assetSalvageValue = depMetricsPanel.getAssetSalvageValue();
-        this.assetLifeYearsLeft = depMetricsPanel.getAssetLifeYears();
+        this.assetCost = depMetricsPanel.getAssetCostTF();
+        this.assetSalvageValue = depMetricsPanel.getAssetSalvageValueTF();
+        this.assetLifeYearsLeft = depMetricsPanel.getAssetLifeYearsTF();
     }
 
     public void validateParameters() {
@@ -28,9 +28,6 @@ public class AssetMetricsInputerVerifier extends InputVerifier {
 
     @Override
     public boolean shouldYieldFocus(JComponent input) {
-        for (iterable_type iterable_element : iterable) {
-            input.
-        }
         if (verify(input)) {
             // textField.setText(String.valueOf(value));
             return true;
@@ -39,7 +36,6 @@ public class AssetMetricsInputerVerifier extends InputVerifier {
             // textField.selectAll();
             return false;
         }
-        return null;
     }
 
     @Override

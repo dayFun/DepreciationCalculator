@@ -49,9 +49,22 @@ public class DepCalcView extends JFrame {
         calculateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Asset newAsset = depMetricsPanel.createAssetFromTextFields();
+                Asset newAsset = depMetricsPanel.createAsset();
             }
         });
+
+        depMetricsPanel.getClearButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                depMetricsPanel.getAssetNameTF().setText("");
+                depMetricsPanel.getAssetCostTF().setText("");
+                depMetricsPanel.getAssetSalvageValueTF().setText("");
+                depMetricsPanel.getAssetLifeYearsTF().setText("");
+            }
+
+        });
+
+
     }
 
     private void initLayout() {

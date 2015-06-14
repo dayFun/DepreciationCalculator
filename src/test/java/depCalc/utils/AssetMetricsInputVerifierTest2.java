@@ -20,7 +20,7 @@ public class AssetMetricsInputVerifierTest2 {
 
     @Test
     public void testVerifyWithValidInputForCostReturnsTrue() throws Exception {
-        depMetricsPanel.getAssetCost().setText("5");
+        depMetricsPanel.getAssetCostTF().setText("5");
 
         assertTrue(verifier.shouldYieldFocus(depMetricsPanel));
 

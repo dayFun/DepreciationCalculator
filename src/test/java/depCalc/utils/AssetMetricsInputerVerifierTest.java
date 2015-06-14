@@ -33,9 +33,9 @@ public class AssetMetricsInputerVerifierTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        when(depMetricsPanel.getAssetCost()).thenReturn(cost);
-        when(depMetricsPanel.getAssetSalvageValue()).thenReturn(salvage);
-        when(depMetricsPanel.getAssetLifeYears()).thenReturn(life);
+        when(depMetricsPanel.getAssetCostTF()).thenReturn(cost);
+        when(depMetricsPanel.getAssetSalvageValueTF()).thenReturn(salvage);
+        when(depMetricsPanel.getAssetLifeYearsTF()).thenReturn(life);
 
         verifier = new AssetMetricsInputerVerifier(depMetricsPanel);
 
