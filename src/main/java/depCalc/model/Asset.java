@@ -85,11 +85,7 @@ public class Asset {
     }
 
     public void setCost(double cost) {
-        if (cost >= 0) {
-            this.cost = cost;
-        } else {
-            throw new IllegalArgumentException("Cost cannot be less than zero.");
-        }
+        this.cost = cost;
     }
 
     public double getSalvageValue() {
@@ -97,11 +93,7 @@ public class Asset {
     }
 
     public void setSalvageValue(double salvageValue) {
-        if (salvageValue >= 0) {
-            this.salvageValue = salvageValue;
-        } else {
-            throw new IllegalArgumentException("Salvage value cannot be less than zero.");
-        }
+        this.salvageValue = salvageValue;
     }
 
     public int getLifeYearsLeft() {
@@ -109,11 +101,7 @@ public class Asset {
     }
 
     public void setLifeYearsLeft(int life) {
-        if (life >= 0) {
-            this.life = life;
-        } else {
-            throw new IllegalArgumentException("Life years left cannot be less than zero.");
-        }
+        this.life = life;
     }
 
     private double switchToStraightLineDepIfNecessary(double presentValue, double depreciation) {
@@ -128,4 +116,7 @@ public class Asset {
 
         return (depreciation < straightLineDep) && (presentValue - straightLineDep > salvageValue);
     }
+
+
+
 }
