@@ -1,15 +1,13 @@
 package depCalc.view;
 
-import depCalc.model.Asset;
 
 public class AssetValidator {
 
-    private String message;
-    private Asset asset;
     private String assetName;
     private String assetCost;
     private String salvageValue;
     private String assetLife;
+    private String message;
 
     public AssetValidator(String assetName, String assetCost, String salvageValue, String assetLife) {
         this.assetName = assetName;
@@ -19,15 +17,6 @@ public class AssetValidator {
         this.message = "";
     }
 
-    /**
-     * @return
-     */
-    /**
-     * @return
-     */
-    /**
-     * @return
-     */
     public boolean validate() {
         if ("".equals(assetName)) {
             setMessage("Asset name cannot be blank!");
@@ -38,27 +27,18 @@ public class AssetValidator {
             return false;
         }
 
+        //TODO: Finish cleaning up/refactoring
         try {
             int parsedLifeYears = Integer.parseInt(assetLife);
-            if (isUserInputNegative(parsedLifeYears)) {
-                return false; 
+            if (parsedLifeYears < 0) {
+                setMessage("Life years left cannot be a negative number, nukka!");
+                return false;
             }
         } catch (NumberFormatException e) {
             setMessage("Life years left must be a whole number!");
             return false;
         }
-
-
         return true;
-
-
-    }
-
-    private void isUserInputNegative(int parsedLifeYears) {
-        if (parsedLifeYears < 0) {
-            setMessage("Life years left cannot be a negative number, nukka!");
-            return false;
-        }
     }
 
     public String getMessage() {

@@ -24,7 +24,6 @@ public class DepCalcView extends JFrame {
     private JButton calculateButton;
 
     public DepCalcView() {
-
         menuBar = new MainMenuBar();
         setJMenuBar(menuBar);
 
@@ -56,10 +55,7 @@ public class DepCalcView extends JFrame {
         depMetricsPanel.getClearButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                depMetricsPanel.getAssetNameTF().setText("");
-                depMetricsPanel.getAssetCostTF().setText("");
-                depMetricsPanel.getAssetSalvageValueTF().setText("");
-                depMetricsPanel.getAssetLifeYearsTF().setText("");
+                depMetricsPanel.clearTextFields();
             }
 
         });

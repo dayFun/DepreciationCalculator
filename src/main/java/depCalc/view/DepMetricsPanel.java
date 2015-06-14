@@ -12,7 +12,6 @@ import javax.swing.JTextField;
 import depCalc.model.Asset;
 
 public class DepMetricsPanel extends JPanel {
-
     private static final long serialVersionUID = -4104415642801279530L;
 
     private JLabel assetNameLabel;
@@ -54,6 +53,13 @@ public class DepMetricsPanel extends JPanel {
         asset.setSalvageValue((Double.valueOf(assetSalvageValueTF.getText())));
         asset.setLifeYearsLeft(Integer.valueOf(assetLifeYearsLeftTF.getText()));
         return asset;
+    }
+
+    public void clearTextFields() {
+        assetNameTF.setText("");
+        assetCostTF.setText("");
+        assetSalvageValueTF.setText("");
+        assetLifeYearsLeftTF.setText("");
     }
 
     public JTextField getAssetNameTF() {
