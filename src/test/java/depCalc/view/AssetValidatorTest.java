@@ -12,50 +12,129 @@ public class AssetValidatorTest {
     private AssetValidator assetValidator;
 
     @Test
-    public void testValidateWithNoAssetNameReturnsFalseWithCorrectErrorMessage() throws Exception {
-        assetValidator = new AssetValidator("", "", "", "");
-
-        String expectedMessage = "Asset name cannot be blank";
-
-        assertFalse(assetValidator.validate());
-        assertEquals(expectedMessage, assetValidator.getMessage());
-    }
-
-    @Test
     public void testValidateWithValidAssetNameReturnsTrueWithNoErrorMessage() throws Exception {
-        assetValidator = new AssetValidator("Car", "", "", "");
+        //Arrange 
+        assetValidator = new AssetValidator("Car", "5000", "1000", "5");
 
+        //Act
         boolean actualValidationValue = assetValidator.validate();
+
+        //Assert
         assertTrue(actualValidationValue);
         assertEquals("", assetValidator.getMessage());
     }
 
     @Test
-    public void testValidateWithNonNumericCostReturnsFalseWithCorrectErrorMessage() throws Exception {
-        assetValidator = new AssetValidator("Pony", "ABC", "", "");
+    public void testValidateWithEmptyAssetNameReturnsFalseWithCorrectMessage() throws Exception {
+        //Arrange 
+        assetValidator = new AssetValidator("", "5000", "1000", "5");
 
-        String expectedMessage = "Asset cost cannot be less than zero";
+        //Act
         boolean actualValidationValue = assetValidator.validate();
+        String actualMessage = assetValidator.getMessage();
 
+        //Assert
         assertFalse(actualValidationValue);
-        assertEquals(expectedMessage, assetValidator.getMessage());
+        assertEquals("Asset name cannot be blank!", actualMessage);
     }
 
     @Test
-    public void testValidateWithNegativeCostReturnsFalseWithCorrectErrorMessage() throws Exception {
-        assetValidator = new AssetValidator("Pony", "-5000", "", "");
+    public void testValidateWithNonNumericCostReturnsFalseWithCorrectMessage() throws Exception {
+        //Arrange 
+        assetValidator = new AssetValidator("Pony", "ABC", "1000", "5");
 
-        String expectedMessage = "Asset cost cannot be less than zero";
-
+        //Act
         boolean actualValidationValue = assetValidator.validate();
+        String actualMessage = assetValidator.getMessage();
 
+        //Assert
         assertFalse(actualValidationValue);
-        assertEquals(expectedMessage, assetValidator.getMessage());
+        assertEquals("Asset Cost must be a number!", actualMessage);
     }
-    //    @Test
-    //    public void testValidateWithNegativeValuesReturnsFalse() throws Exception {
-    //        Asset asset = new Asset("My Asset", -500.0, -100.0, -5);
-    //        assetValidator.validate(asset);
-    //    }
+
+    @Test
+    public void testValidateWithAssetCostAsEmptyStringReturnsFalseWithCorrectMessage() throws Exception {
+        //Arrange 
+        assetValidator = new AssetValidator("Pony", "", "1000", "5");
+
+        //Act
+        boolean actualValidationValue = assetValidator.validate();
+        String actualMessage = assetValidator.getMessage();
+
+        //Assert
+        assertFalse(actualValidationValue);
+        assertEquals("Asset Cost must be a number!", actualMessage);
+    }
+
+    @Test
+    public void testValidateWithNegativeAssetCostReturnsFalseWithCorrectMessage() throws Exception {
+        //Arrange 
+        assetValidator = new AssetValidator("Pony", "-1000", "1000", "5");
+
+        //Act
+        boolean actualValidationValue = assetValidator.validate();
+        String actualMessage = assetValidator.getMessage();
+
+        //Assert
+        assertFalse(actualValidationValue);
+        assertEquals("Asset C" + "ost cannot be a negative number, dummy!", actualMessage);
+    }
+
+    @Test
+    public void testValidateWithEmptyStringAsSalvageValueReturnsFalseWithCorrectMessage() throws Exception {
+        //Arrange 
+        assetValidator = new AssetValidator("Pony", "5000", "", "5");
+
+        //Act
+        boolean actualValidationValue = assetValidator.validate();
+        String actualMessage = assetValidator.getMessage();
+
+        //Assert
+        assertFalse(actualValidationValue);
+        assertEquals("Salvage Value must be a number!", actualMessage);
+    }
+
+    @Test
+    public void testValidateWithNegativeSalvageValueReturnsFalseWithCorrectMessage() throws Exception {
+        //Arrange 
+        assetValidator = new AssetValidator("Pony", "1000", "-1000", "5");
+
+        //Act
+        boolean actualValidationValue = assetValidator.validate();
+        String actualMessage = assetValidator.getMessage();
+
+        //Assert
+        assertFalse(actualValidationValue);
+        assertEquals("Salvage Value cannot be a negative number, dummy!", actualMessage);
+    }
+
+    @Test
+    public void testValidateWithEmptyStringAsLifeYearsLeftReturnsFalseWithCorrectMessage() throws Exception {
+        //Arrange 
+        assetValidator = new AssetValidator("Pony", "5000", "10", "");
+
+        //Act
+        boolean actualValidationValue = assetValidator.validate();
+        String actualMessage = assetValidator.getMessage();
+
+        //Assert
+        assertFalse(actualValidationValue);
+        assertEquals("Life years left must be a whole number!", actualMessage);
+    }
+
+    @Test
+    public void testValidateWithNegativeLifeYearsLeftReturnsFalseWithCorrectMessage() throws Exception {
+        //Arrange 
+        assetValidator = new AssetValidator("Pony", "1000", "1000", "-5");
+
+        //Act
+        boolean actualValidationValue = assetValidator.validate();
+        String actualMessage = assetValidator.getMessage();
+
+        //Assert
+        assertFalse(actualValidationValue);
+        assertEquals("Life years left cannot be a negative number, nukka!", actualMessage);
+    }
+
 
 }
