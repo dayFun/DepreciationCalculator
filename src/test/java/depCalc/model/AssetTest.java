@@ -16,15 +16,15 @@ public class AssetTest {
         asset = new Asset("Truck", 30000, 5000, 5);
     }
 
-    @Test
-    public void testStraightLineGetAnnualDep() throws Exception {
-        assertThat(asset.getAnnualDep(), is(equalTo(5000.0)));
-    }
+    //    @Test
+    //    public void testStraightLineGetAnnualDep() throws Exception {
+    //        assertThat(asset.getAnnualDep(), is(equalTo(5000.0)));
+    //    }
 
-    @Test
-    public void testDoubleDeclineDepForOneYear() throws Exception {
-        assertThat(asset.getAnnualDep(1), is(equalTo(12000.0)));
-    }
+    //    @Test
+    //    public void testDoubleDeclineDepForOneYear() throws Exception {
+    //        assertThat(asset.getAnnualDep(1), is(equalTo(12000.0)));
+    //    }
 
     @Test
     public void testWhenDoubleDeclineDepIsLowerThanStraightLineThenUseStraightLineDep() throws Exception {
@@ -36,10 +36,10 @@ public class AssetTest {
         assertThat(asset.getAnnualDep(5), is(equalTo(0.0)));
     }
 
-    @Test
-    public void testGetBeginningBalanceAtTwoYearsWithStraightLine() throws Exception {
-        assertThat(asset.getBeginningBalance(2, 'S'), is(equalTo(25000.0)));
-    }
+    //    @Test
+    //    public void testGetBeginningBalanceAtTwoYearsWithStraightLine() throws Exception {
+    //        assertThat(asset.getBeginningBalance(2, 'S'), is(equalTo(25000.0)));
+    //    }
 
     @Test
     public void testGetBeginningBalanceAtFiveYearsWithStraightLine() throws Exception {
@@ -56,10 +56,10 @@ public class AssetTest {
         assertThat(asset.getBeginningBalance(5, 'D'), is(equalTo(5000.0)));
     }
 
-    @Test
-    public void testGetEndingBalanceForStraightLineDepAfterOneYear() throws Exception {
-        assertThat(asset.getEndingBalance(1, 'S'), is(equalTo(25000.0)));
-    }
+    //    @Test
+    //    public void testGetEndingBalanceForStraightLineDepAfterOneYear() throws Exception {
+    //        assertThat(asset.getEndingBalance(1, 'S'), is(equalTo(25000.0)));
+    //    }
 
     @Test
     public void testGetEndingBalanceForStraightLineDepAfterFiveYears() throws Exception {

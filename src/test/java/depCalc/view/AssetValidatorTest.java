@@ -77,7 +77,7 @@ public class AssetValidatorTest {
 
         //Assert
         assertFalse(actualValidationValue);
-        assertEquals("Asset C" + "ost cannot be a negative number, dummy!", actualMessage);
+        assertEquals("Asset C" + "ost cannot be a negative number!", actualMessage);
     }
 
     @Test
@@ -105,7 +105,7 @@ public class AssetValidatorTest {
 
         //Assert
         assertFalse(actualValidationValue);
-        assertEquals("Salvage Value cannot be a negative number, dummy!", actualMessage);
+        assertEquals("Salvage Value cannot be a negative number!", actualMessage);
     }
 
     @Test
@@ -133,7 +133,7 @@ public class AssetValidatorTest {
 
         //Assert
         assertFalse(actualValidationValue);
-        assertEquals("Life years left cannot be a negative number, nukka!", actualMessage);
+        assertEquals("Life years left cannot be a negative number!", actualMessage);
     }
 
 

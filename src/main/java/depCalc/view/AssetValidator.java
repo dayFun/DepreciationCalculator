@@ -1,19 +1,20 @@
 package depCalc.view;
 
 
+
 public class AssetValidator {
 
     private String assetName;
     private String assetCost;
     private String salvageValue;
-    private String assetLife;
+    private String lifeYearsLeft;
     private String message;
 
-    public AssetValidator(String assetName, String assetCost, String salvageValue, String assetLife) {
+    public AssetValidator(String assetName, String assetCost, String salvageValue, String lifeYearsLeft) {
         this.assetName = assetName;
         this.assetCost = assetCost;
         this.salvageValue = salvageValue;
-        this.assetLife = assetLife;
+        this.lifeYearsLeft = lifeYearsLeft;
         this.message = "";
     }
 
@@ -29,16 +30,33 @@ public class AssetValidator {
 
         //TODO: Finish cleaning up/refactoring
         try {
-            int parsedLifeYears = Integer.parseInt(assetLife);
+            int parsedLifeYears = Integer.parseInt(lifeYearsLeft);
             if (parsedLifeYears < 0) {
-                setMessage("Life years left cannot be a negative number, nukka!");
+                setMessage("Life years left cannot be a negative number!");
                 return false;
             }
         } catch (NumberFormatException e) {
             setMessage("Life years left must be a whole number!");
             return false;
         }
+
         return true;
+    }
+
+    public String getAssetName() {
+        return assetName;
+    }
+
+    public String getAssetCost() {
+        return assetCost;
+    }
+
+    public String getSalvageValue() {
+        return salvageValue;
+    }
+
+    public String getLifeYearsLeft() {
+        return lifeYearsLeft;
     }
 
     public String getMessage() {
@@ -53,7 +71,7 @@ public class AssetValidator {
         try {
             double parsedUserInput = Double.parseDouble(actualUserInput);
             if (parsedUserInput < 0) {
-                setMessage(inputField + " cannot be a negative number, dummy!");
+                setMessage(inputField + " cannot be a negative number!");
                 return false;
             }
         } catch (NumberFormatException e) {

@@ -24,7 +24,7 @@ public class Presenter implements IAssetEntryListener {
 
     @Override
     public void handleCalculateButtonClicked(Asset asset) {
-
+        depCalcView.getDepTablePanel().setData(asset);
     }
 
 
