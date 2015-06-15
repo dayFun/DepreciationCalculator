@@ -30,7 +30,8 @@ public class AssetTwo {
         if (depreciationMethod == STRAIGHT_LINE_DEPRECIATION) {
             return getAnnualDepreciation();
         } else if (depreciationMethod == DOUBLE_DECLINE_DEPRECIATION) {
-            return getDoubleDeclineDeprication(cost);
+            double beginningBalance = getBeginningBalance(year, depreciationMethod);
+            return getDoubleDeclineDeprication(beginningBalance);
         }
 
         return UNKNOWN_DEPRECIATION_METHOD_FLAG;
@@ -84,6 +85,13 @@ public class AssetTwo {
     }
 
     private double getDoubleDeclineDeprication(double beginningBalance) {
-        return beginningBalance * DOUBLE_DECLINING_RATE;
+        double doubleDeclineDepreciationRate = beginningBalance * DOUBLE_DECLINING_RATE;
+        double straightLineDepreciationRate = getAnnualDepreciation();
+
+        if (doubleDeclineDepreciationRate < straightLineDepreciationRate) {
+            return straightLineDepreciationRate;
+        } else {
+            return doubleDeclineDepreciationRate;
+        }
     }
 }

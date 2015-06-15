@@ -51,6 +51,12 @@ public class AssetTwoTest {
         assertThat(asset.getEndingBalance(2, 'D'), is(equalTo(10800.0)));
     }
 
+    @Test
+    public void testWhenDoubleDeclineRateIsLowerThanStraightLineThenUseStraightLineDepreciation() throws Exception {
+        assertThat(asset.getBeginningBalance(3, 'D'), is(equalTo(10800.0)));
+        assertThat(asset.getAnnualDepreciation(3, 'D'), is(equalTo(5000.0)));
+    }
+
 
 
 }
