@@ -34,18 +34,23 @@ public class Asset {
 
     public double getBeginningBalance(int year, char depreciationMethod) {
         double balance = cost;
+        boolean usingKnownDepreciationMethod = false;
 
         if (depreciationMethod == STRAIGHT_LINE_DEPRECIATION) {
             double annualDepreciation = getAnnualDepreciation();
             for (int currentYear = 1; currentYear < year; currentYear++) {
                 balance -= annualDepreciation;
             }
-            return balance;
+            usingKnownDepreciationMethod = true;
         } else if (depreciationMethod == DOUBLE_DECLINE_DEPRECIATION) {
             for (int currentYear = 1; currentYear < year; currentYear++) {
                 double depreciation = getDoubleDeclineDeprication(balance);
                 balance -= depreciation;
             }
+            usingKnownDepreciationMethod = true;
+        }
+
+        if (usingKnownDepreciationMethod) {
             return balance;
         }
 
