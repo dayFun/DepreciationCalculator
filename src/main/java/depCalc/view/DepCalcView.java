@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 
 import depCalc.listeners.IAssetEntryListener;
 import depCalc.model.Asset;
+import depCalc.utils.AssetValidator;
 
 
 public class DepCalcView extends JFrame {

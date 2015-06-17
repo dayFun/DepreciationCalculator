@@ -9,7 +9,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import depCalc.model.Asset;
-import depCalc.model.DepScheduleTableModel;
 
 public class DepScheduleTablePanel extends JPanel {
 
@@ -28,7 +27,7 @@ public class DepScheduleTablePanel extends JPanel {
         add(new JScrollPane(table));
     }
 
-    public void setData(Asset asset) {
+    public void setData(Asset asset, char depreciationMethod) {
         tableModel.setData(asset);
         tableModel.fireTableDataChanged();
     }

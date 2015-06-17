@@ -8,6 +8,7 @@ public interface IAssetEntryListener {
 
     public void handleClearButtonClicked();
 
-    public void handleCalculateButtonClicked(Asset asset);
+    public char getDepreciationMethod();
 
+    public void handleCalculateButtonClicked(Asset asset);
 }

@@ -27,9 +27,8 @@ public class Asset {
     }
 
     public double getAnnualDepreciation(int year) {
-        double beginningBalance = getBeginningBalance(year, 'D');
+        double beginningBalance = getBeginningBalance(year, DOUBLE_DECLINE_DEPRECIATION);
         return getDoubleDeclineDeprication(beginningBalance);
-
     }
 
     public double getBeginningBalance(int year, char depreciationMethod) {

@@ -27,6 +27,12 @@ public class Presenter implements IAssetEntryListener {
         depCalcView.getDepTablePanel().setData(asset);
     }
 
+    @Override
+    public char getDepreciationMethod() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
 
 
 }

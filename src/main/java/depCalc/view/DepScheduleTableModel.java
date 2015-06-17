@@ -1,6 +1,8 @@
-package depCalc.model;
+package depCalc.view;
 
 import javax.swing.table.AbstractTableModel;
+
+import depCalc.model.Asset;
 
 public class DepScheduleTableModel extends AbstractTableModel {
 
@@ -39,7 +41,7 @@ public class DepScheduleTableModel extends AbstractTableModel {
             case 1:
                 return asset.getBeginningBalance(year, 'S');
             case 2:
-                return asset.getAnnualDepreciation(year);
+                return asset.getAnnualDepreciation();
             case 3:
                 return asset.getEndingBalance(year, 'S');
             default:

@@ -15,19 +15,23 @@ public class DepOptionPanel extends JPanel {
 
     private JLabel depTypeLabel;
     private ButtonGroup depTypeButtonGroup;
-    private JRadioButton straightLineRButton;
-    private JRadioButton doubleDecliningRButton;
+    private JRadioButton straightLineRadioButton;
+    private JRadioButton doubleDecliningRadioButton;
 
     public DepOptionPanel() {
         setLayout(new GridBagLayout());
 
         depTypeLabel = new JLabel("Depreciation Type:");
-        straightLineRButton = new JRadioButton("Straight Line");
-        doubleDecliningRButton = new JRadioButton("Double Declining");
+
+        straightLineRadioButton = new JRadioButton("Straight Line");
+        straightLineRadioButton.setActionCommand("S");
+
+        doubleDecliningRadioButton = new JRadioButton("Double Declining");
+        doubleDecliningRadioButton.setActionCommand("D");
 
         depTypeButtonGroup = new ButtonGroup();
-        depTypeButtonGroup.add(straightLineRButton);
-        depTypeButtonGroup.add(doubleDecliningRButton);
+        depTypeButtonGroup.add(straightLineRadioButton);
+        depTypeButtonGroup.add(doubleDecliningRadioButton);
 
         initLayout();
     }
@@ -50,12 +54,12 @@ public class DepOptionPanel extends JPanel {
         gc.gridy = 1;
         gc.insets = new Insets(5, 0, 0, 10);
 
-        add(straightLineRButton, gc);
+        add(straightLineRadioButton, gc);
 
         gc.gridx = 1;
         gc.gridy = 1;
         gc.insets = new Insets(5, 0, 0, 10);
 
-        add(doubleDecliningRButton, gc);
+        add(doubleDecliningRadioButton, gc);
     }
 }
