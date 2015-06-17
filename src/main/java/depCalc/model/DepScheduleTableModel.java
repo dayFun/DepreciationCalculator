@@ -39,7 +39,7 @@ public class DepScheduleTableModel extends AbstractTableModel {
             case 1:
                 return asset.getBeginningBalance(year, 'S');
             case 2:
-                return asset.getAnnualDep(year);
+                return asset.getAnnualDepreciation(year);
             case 3:
                 return asset.getEndingBalance(year, 'S');
             default:

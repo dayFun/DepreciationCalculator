@@ -1,75 +1,66 @@
 package depCalc.model;
 
 public class Asset {
-
-    private static final char STRAIGHT_LINE_DEP = 'S';
-    private static final char DOUBLE_DECLINE_DEP = 'D';
+    private static final char STRAIGHT_LINE_DEPRECIATION = 'S';
+    private static final char DOUBLE_DECLINE_DEPRECIATION = 'D';
     private static final double DOUBLE_DECLINING_RATE = 0.4;
+    private static final double UNKNOWN_DEPRECIATION_METHOD_FLAG = -99.99;
 
     private String name;
     private double cost;
     private double salvageValue;
-    private int life;
+    private int lifeYearsLeft;
 
     public Asset() {
         this("", 0.0, 0.0, 0);
     }
 
-    public Asset(String name, double cost, double salvageValue, int life) {
+    public Asset(String name, double cost, double salvageValue, int lifeYearsLeft) {
         this.name = name;
-        setCost(cost);
-        setSalvageValue(salvageValue);
-        setLifeYearsLeft(life);
+        this.cost = cost;
+        this.salvageValue = salvageValue;
+        this.lifeYearsLeft = lifeYearsLeft;
     }
 
-    public double getAnnualDep() {
-        return (cost - salvageValue) / life;
+    public double getAnnualDepreciation() {
+        return (cost - salvageValue) / lifeYearsLeft;
     }
 
-    public double getAnnualDep(int year) {
-        double presentValue = cost;
-        double depreciation = 0;
-        for (int i = 1; i <= year; i++) {
-            depreciation = presentValue * DOUBLE_DECLINING_RATE;
-            if (presentValue <= salvageValue) {
-                depreciation = 0;
-            } else if (presentValue - depreciation < salvageValue) {
-                depreciation = presentValue - salvageValue;
-            }
+    public double getAnnualDepreciation(int year) {
+        double beginningBalance = getBeginningBalance(year, 'D');
+        return getDoubleDeclineDeprication(beginningBalance);
 
-            depreciation = switchToStraightLineDepIfNecessary(presentValue, depreciation);
-            presentValue = presentValue - depreciation;
-        }
-        return depreciation;
     }
-
 
     public double getBeginningBalance(int year, char depreciationMethod) {
-        double beginningBalance = cost;
-        if (depreciationMethod == STRAIGHT_LINE_DEP) {
-            for (int i = 1; i < year; i++) {
-                beginningBalance = beginningBalance - getAnnualDep();
+        double balance = cost;
+
+        if (depreciationMethod == STRAIGHT_LINE_DEPRECIATION) {
+            double annualDepreciation = getAnnualDepreciation();
+            for (int currentYear = 1; currentYear < year; currentYear++) {
+                balance -= annualDepreciation;
             }
-        } else if (depreciationMethod == DOUBLE_DECLINE_DEP) {
-            for (int i = 1; i < year; i++) {
-                beginningBalance = beginningBalance - getAnnualDep(i);
+            return balance;
+        } else if (depreciationMethod == DOUBLE_DECLINE_DEPRECIATION) {
+            for (int currentYear = 1; currentYear < year; currentYear++) {
+                double depreciation = getDoubleDeclineDeprication(balance);
+                balance -= depreciation;
             }
+            return balance;
         }
-        return beginningBalance;
+
+        return UNKNOWN_DEPRECIATION_METHOD_FLAG;
     }
 
     public double getEndingBalance(int year, char depreciationMethod) {
-        double endingBalance = cost;
-        if (depreciationMethod == STRAIGHT_LINE_DEP) {
-            for (int i = 1; i <= year; i++) {
-                endingBalance = endingBalance - getAnnualDep();
-            }
-        } else if (depreciationMethod == DOUBLE_DECLINE_DEP) {
-            for (int i = 1; i <= year; i++) {
-                endingBalance = endingBalance - getAnnualDep(i);
-            }
+        double endingBalance = getBeginningBalance(year, depreciationMethod);
+        if (depreciationMethod == STRAIGHT_LINE_DEPRECIATION) {
+            return endingBalance - getAnnualDepreciation();
+        } else if (depreciationMethod == DOUBLE_DECLINE_DEPRECIATION) {
+            return endingBalance - getDoubleDeclineDeprication(endingBalance);
         }
-        return endingBalance;
+
+        return UNKNOWN_DEPRECIATION_METHOD_FLAG;
     }
 
     public String getName() {
@@ -97,26 +88,29 @@ public class Asset {
     }
 
     public int getLifeYearsLeft() {
-        return life;
+        return lifeYearsLeft;
     }
 
-    public void setLifeYearsLeft(int life) {
-        this.life = life;
+    public void setLifeYearsLeft(int lifeYearsLeft) {
+        this.lifeYearsLeft = lifeYearsLeft;
     }
 
-    private double switchToStraightLineDepIfNecessary(double presentValue, double depreciation) {
-        if (depreciation != 0 && shouldSwitchToStaightLineDep(depreciation, presentValue)) {
-            depreciation = getAnnualDep();
+    private double getDoubleDeclineDeprication(double beginningBalance) {
+        double doubleDeclineDepreciationRate = beginningBalance * DOUBLE_DECLINING_RATE;
+        double straightLineDepreciationRate = getAnnualDepreciation();
+
+        if (doubleDeclineDepreciationRate < straightLineDepreciationRate) {
+            return maximumAllowableDepreciation(beginningBalance, straightLineDepreciationRate);
+        } else {
+            return doubleDeclineDepreciationRate;
         }
-        return depreciation;
     }
 
-    private boolean shouldSwitchToStaightLineDep(double depreciation, double presentValue) {
-        double straightLineDep = getAnnualDep();
-
-        return (depreciation < straightLineDep) && (presentValue - straightLineDep > salvageValue);
+    private double maximumAllowableDepreciation(double beginningBalance, double depreciation) {
+        double valueAfterDepreciation = beginningBalance - depreciation;
+        if (valueAfterDepreciation > salvageValue) {
+            return depreciation;
+        }
+        return beginningBalance - salvageValue;
     }
-
-
-
 }
