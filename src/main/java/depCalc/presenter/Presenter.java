@@ -1,7 +1,7 @@
 package depCalc.presenter;
 
 import depCalc.listeners.IAssetEntryListener;
-import depCalc.model.Asset;
+import depCalc.model.DepreciationCalculator;
 import depCalc.view.DepCalcView;
 
 public class Presenter implements IAssetEntryListener {
@@ -23,8 +23,8 @@ public class Presenter implements IAssetEntryListener {
     }
 
     @Override
-    public void handleCalculateButtonClicked(Asset asset) {
-        depCalcView.getDepTablePanel().setData(asset);
+    public void handleCalculateButtonClicked(DepreciationCalculator depreciationCalculator) {
+        depCalcView.getDepTablePanel().setData(depreciationCalculator);
     }
 
     @Override

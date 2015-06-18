@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import depCalc.listeners.IAssetEntryListener;
-import depCalc.model.Asset;
 import depCalc.utils.AssetValidator;
 
 
@@ -57,8 +56,8 @@ public class DepCalcView extends JFrame {
                 AssetValidator validator = new AssetValidator(assetName, assetCost, salvageValue, lifeYearsLeft);
 
                 if (validator.validate()) {
-                    Asset newAsset = depMetricsPanel.createAsset();
-                    viewListener.handleCalculateButtonClicked(newAsset);
+                    //                    Asset newAsset = depMetricsPanel.createAsset();
+                    //                    viewListener.handleCalculateButtonClicked(newAsset);
                 } else {
 
                 }

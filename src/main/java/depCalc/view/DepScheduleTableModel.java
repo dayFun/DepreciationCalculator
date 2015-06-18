@@ -2,22 +2,22 @@ package depCalc.view;
 
 import javax.swing.table.AbstractTableModel;
 
-import depCalc.model.Asset;
+import depCalc.model.DepreciationCalculator;
 
 public class DepScheduleTableModel extends AbstractTableModel {
 
     private static final long serialVersionUID = -7010312622673643462L;
     private String[] columnHeaders = {"Year", "Beginning Balance", "Annual Depreciation", "Ending Balance"};
-    private Asset asset;
+    private DepreciationCalculator depreciationCalculator;
 
-    public void setData(Asset asset) {
-        this.asset = asset;
+    public void setData(DepreciationCalculator depreciationCalculator) {
+        this.depreciationCalculator = depreciationCalculator;
     }
 
     @Override
     public int getRowCount() {
-        if (asset != null) {
-            return asset.getLifeYearsLeft();
+        if (depreciationCalculator != null) {
+            return depreciationCalculator.getAsset().getLifeYearsLeft();
         }
         return 0;
     }
@@ -39,18 +39,19 @@ public class DepScheduleTableModel extends AbstractTableModel {
             case 0:
                 return year;
             case 1:
-                return asset.getBeginningBalance(year, 'S');
+                return depreciationCalculator.getBeginningBalance(year, 'S');
             case 2:
-                return asset.getAnnualDepreciation();
+                return depreciationCalculator.getAnnualDepreciation();
             case 3:
-                return asset.getEndingBalance(year, 'S');
+                return depreciationCalculator.getEndingBalance(year, 'S');
             default:
                 return null;
         }
     }
 
+    //TODO: Will this work?
     public void clear() {
-        asset = null;
+        depreciationCalculator = null;
     }
 
 }
