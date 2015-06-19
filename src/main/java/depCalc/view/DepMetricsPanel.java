@@ -9,8 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import depCalc.model.Asset;
-
 public class DepMetricsPanel extends JPanel {
     private static final long serialVersionUID = -4104415642801279530L;
 
@@ -44,15 +42,6 @@ public class DepMetricsPanel extends JPanel {
         clearButton = new JButton("Clear");
 
         initLayout();
-    }
-
-    public Asset createAsset() {
-        Asset asset = new Asset();
-        asset.setName(assetNameTF.getText());
-        asset.setCost(Double.valueOf(assetCostTF.getText()));
-        asset.setSalvageValue((Double.valueOf(assetSalvageValueTF.getText())));
-        asset.setLifeYearsLeft(Integer.valueOf(assetLifeYearsLeftTF.getText()));
-        return asset;
     }
 
     public void clearTextFields() {

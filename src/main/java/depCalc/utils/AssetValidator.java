@@ -1,6 +1,6 @@
 package depCalc.utils;
 
-
+import depCalc.listeners.IAssetValidatorListener;
 
 public class AssetValidator {
 
@@ -9,13 +9,17 @@ public class AssetValidator {
     private String salvageValue;
     private String lifeYearsLeft;
     private String message;
+    private IAssetValidatorListener listener;
 
     public AssetValidator(String assetName, String assetCost, String salvageValue, String lifeYearsLeft) {
         this.assetName = assetName;
         this.assetCost = assetCost;
         this.salvageValue = salvageValue;
         this.lifeYearsLeft = lifeYearsLeft;
-        this.message = "";
+    }
+
+    public void setValidationListener(IAssetValidatorListener listener) {
+        this.listener = listener;
     }
 
     public boolean validate() {
@@ -39,7 +43,6 @@ public class AssetValidator {
             setMessage("Life years left must be a whole number!");
             return false;
         }
-
         return true;
     }
 

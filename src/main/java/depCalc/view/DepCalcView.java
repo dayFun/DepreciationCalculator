@@ -37,7 +37,7 @@ public class DepCalcView extends JFrame {
         setWindowOptions();
     }
 
-    public void attachListeners(final IAssetEntryListener viewListener) {
+    public void attachViewListeners(final IAssetEntryListener viewListener) {
         menuBar.getExitMenuItem().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,12 +55,7 @@ public class DepCalcView extends JFrame {
 
                 AssetValidator validator = new AssetValidator(assetName, assetCost, salvageValue, lifeYearsLeft);
 
-                if (validator.validate()) {
-                    //                    Asset newAsset = depMetricsPanel.createAsset();
-                    //                    viewListener.handleCalculateButtonClicked(newAsset);
-                } else {
-
-                }
+                viewListener.handleCalculateButtonClicked(validator);
             }
         });
 

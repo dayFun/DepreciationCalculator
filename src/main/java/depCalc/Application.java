@@ -13,7 +13,7 @@ public class Application {
                 DepCalcView depCalcView = new DepCalcView();
                 Presenter presenter = new Presenter(depCalcView);
 
-                depCalcView.attachListeners(presenter);
+                depCalcView.attachViewListeners(presenter);
                 depCalcView.setVisible(true);
             }
         });
