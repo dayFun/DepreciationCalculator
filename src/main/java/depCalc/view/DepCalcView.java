@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import depCalc.listeners.IAssetEntryListener;
+import depCalc.listeners.IAssetValidatorListener;
+import depCalc.model.Asset;
 import depCalc.utils.AssetValidator;
 
 
@@ -22,6 +24,7 @@ public class DepCalcView extends JFrame {
     private DepOptionPanel depOptionPanel;
     private DepScheduleTablePanel depTablePanel;
     private JButton calculateButton;
+    private AssetValidator validator;
 
     public DepCalcView() {
         menuBar = new MainMenuBar();
@@ -33,8 +36,15 @@ public class DepCalcView extends JFrame {
         depTablePanel.setPreferredSize(new Dimension(300, 300));
         calculateButton = new JButton("Calculate");
 
+        validator = new AssetValidator();
+        initValidator();
+
         initLayout();
         setWindowOptions();
+    }
+
+    private void initValidator() {
+
     }
 
     public void attachViewListeners(final IAssetEntryListener viewListener) {
@@ -53,9 +63,18 @@ public class DepCalcView extends JFrame {
                 String salvageValue = depMetricsPanel.getAssetSalvageValueTF().getText();
                 String lifeYearsLeft = depMetricsPanel.getAssetLifeYearsTF().getText();
 
-                AssetValidator validator = new AssetValidator(assetName, assetCost, salvageValue, lifeYearsLeft);
+                validator.setValidationListener(new IAssetValidatorListener() {
 
-                viewListener.handleCalculateButtonClicked(validator);
+                    @Override
+                    public Asset validationPassed(String assetName, double assetCost, double salvageValue, int lifeYearsLeft) {
+                    }
+
+                    @Override
+                    public void validationFailed(String message) {
+                    }
+                });
+
+                validator.validate(assetName, assetCost, salvageValue, lifeYearsLeft);
             }
         });
 

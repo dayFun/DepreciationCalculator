@@ -1,6 +1,6 @@
 package depCalc.listeners;
 
-import depCalc.utils.AssetValidator;
+import depCalc.model.Asset;
 
 public interface IAssetEntryListener {
 
@@ -10,5 +10,5 @@ public interface IAssetEntryListener {
 
     public char getDepreciationMethod();
 
-    public void handleCalculateButtonClicked(AssetValidator validator);
+    public void handleCalculateButtonClicked(Asset asset);
 }
