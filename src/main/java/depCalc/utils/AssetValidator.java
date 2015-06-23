@@ -7,6 +7,10 @@ public class AssetValidator {
     private String message;
     private IAssetValidatorListener listener;
 
+    public AssetValidator() {
+        message = "";
+    }
+
 
     public void setValidationListener(IAssetValidatorListener listener) {
         this.listener = listener;

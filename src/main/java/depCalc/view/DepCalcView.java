@@ -66,7 +66,8 @@ public class DepCalcView extends JFrame {
                 validator.setValidationListener(new IAssetValidatorListener() {
 
                     @Override
-                    public Asset validationPassed(String assetName, double assetCost, double salvageValue, int lifeYearsLeft) {
+                    public void validationPassed(String assetName, double assetCost, double salvageValue, int lifeYearsLeft) {
+                        viewListener.handleCalculateButtonClicked(new Asset(assetName, assetCost, salvageValue, lifeYearsLeft));
                     }
 
                     @Override

@@ -1,12 +1,10 @@
 package depCalc.presenter;
 
 import depCalc.listeners.IAssetEntryListener;
-import depCalc.listeners.IAssetValidatorListener;
 import depCalc.model.Asset;
-import depCalc.utils.AssetValidator;
 import depCalc.view.DepCalcView;
 
-public class Presenter implements IAssetEntryListener, IAssetValidatorListener {
+public class Presenter implements IAssetEntryListener {
 
     private DepCalcView depCalcView;
 
@@ -22,31 +20,15 @@ public class Presenter implements IAssetEntryListener, IAssetValidatorListener {
     @Override
     public void handleClearButtonClicked() {
 
+
     }
 
     @Override
-    public void handleCalculateButtonClicked(AssetValidator validator) {
-        if (validator.validate()) {
-            validationPassed(assetName, assetCost, salvageValue, lifeYearsLeft);
-        }
-        depCalcView.getDepTablePanel().setData(depreciationCalculator);
+    public void handleCalculateButtonClicked(Asset asset) {
     }
 
     @Override
     public char getDepreciationMethod() {
         return 0;
     }
-
-    @Override
-    public Asset validationPassed(String assetName, double assetCost, double salvageValue, int lifeYearsLeft) {
-        return null;
-    }
-
-    @Override
-    public String validationFailed() {
-        return null;
-    }
-
-
-
 }

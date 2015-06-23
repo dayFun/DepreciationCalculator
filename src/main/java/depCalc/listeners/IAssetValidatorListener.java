@@ -1,10 +1,9 @@
 package depCalc.listeners;
 
-import depCalc.model.Asset;
 
 public interface IAssetValidatorListener {
 
-    public Asset validationPassed(String assetName, double assetCost, double salvageValue, int lifeYearsLeft);
+    public void validationPassed(String assetName, double assetCost, double salvageValue, int lifeYearsLeft);
 
     public void validationFailed(String message);
 
