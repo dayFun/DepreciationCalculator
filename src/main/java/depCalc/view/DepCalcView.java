@@ -11,10 +11,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import depCalc.AssetValidator;
+import depCalc.listeners.DepreciationMethodListener;
 import depCalc.listeners.IAssetEntryListener;
 import depCalc.listeners.IAssetValidatorListener;
 import depCalc.model.Asset;
-import depCalc.utils.AssetValidator;
 
 
 public class DepCalcView extends JFrame {
@@ -27,6 +28,7 @@ public class DepCalcView extends JFrame {
     private JButton calculateButton;
     private JLabel errorMessageLabel;
     private AssetValidator validator;
+    private DepreciationMethodListener depreciationMethodListener;
 
     public DepCalcView() {
         menuBar = new MainMenuBar();
@@ -40,6 +42,7 @@ public class DepCalcView extends JFrame {
         calculateButton = new JButton("Calculate");
 
         validator = new AssetValidator();
+        depreciationMethodListener = new DepreciationMethodListener();
 
         initLayout();
         setWindowOptions();
@@ -66,7 +69,12 @@ public class DepCalcView extends JFrame {
 
                     @Override
                     public void validationPassed(String assetName, double assetCost, double salvageValue, int lifeYearsLeft) {
-                        viewListener.handleCalculateButtonClicked(new Asset(assetName, assetCost, salvageValue, lifeYearsLeft));
+                        if (depreciationMethodListener.getDepreciationMethod() != null) {
+                            Asset asset = new Asset(assetName, assetCost, salvageValue, lifeYearsLeft);
+                            viewListener.handleCalculateButtonClicked(asset, depreciationMethodListener.getDepreciationMethod());
+                        } else {
+                            errorMessageLabel.setText("You must select a depreciation method...");
+                        }
                     }
 
                     @Override
@@ -82,9 +90,11 @@ public class DepCalcView extends JFrame {
         depMetricsPanel.getClearButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                depMetricsPanel.clearTextFields();
+                viewListener.handleClearButtonClicked();
             }
         });
+
+        depOptionPanel.setListener(depreciationMethodListener);
     }
 
     public DepMetricsPanel getDepMetricsPanel() {
@@ -151,5 +161,12 @@ public class DepCalcView extends JFrame {
         setSize(800, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+
+    public void clearScreen() {
+        depMetricsPanel.clearTextFields();
+        errorMessageLabel.setText("");
+        depTablePanel.setData(null);
     }
 }

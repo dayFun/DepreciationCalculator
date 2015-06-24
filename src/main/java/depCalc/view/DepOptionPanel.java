@@ -9,6 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import depCalc.DepreciationMethodConstants;
+import depCalc.listeners.DepreciationMethodListener;
+
 public class DepOptionPanel extends JPanel {
 
     private static final long serialVersionUID = 222350806862423649L;
@@ -24,10 +27,10 @@ public class DepOptionPanel extends JPanel {
         depTypeLabel = new JLabel("Depreciation Type:");
 
         straightLineRadioButton = new JRadioButton("Straight Line");
-        straightLineRadioButton.setActionCommand("S");
+        straightLineRadioButton.setActionCommand(DepreciationMethodConstants.STRAIGHT_LINE);
 
         doubleDecliningRadioButton = new JRadioButton("Double Declining");
-        doubleDecliningRadioButton.setActionCommand("D");
+        doubleDecliningRadioButton.setActionCommand(DepreciationMethodConstants.DOUBLE_DECLINE);
 
         depTypeButtonGroup = new ButtonGroup();
         depTypeButtonGroup.add(straightLineRadioButton);
@@ -35,6 +38,13 @@ public class DepOptionPanel extends JPanel {
 
         initLayout();
     }
+
+    public void setListener(DepreciationMethodListener listener) {
+        straightLineRadioButton.addActionListener(listener);
+        doubleDecliningRadioButton.addActionListener(listener);
+    }
+
+
 
     private void initLayout() {
         GridBagConstraints gc = new GridBagConstraints();

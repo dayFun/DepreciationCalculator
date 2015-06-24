@@ -1,4 +1,4 @@
-package depCalc.utils;
+package depCalc;
 
 import depCalc.listeners.IAssetValidatorListener;
 
@@ -24,9 +24,12 @@ public class AssetValidator {
 
         if (assetName != null && assetCostDouble != null && salvageValueDouble != null && lifeYearsLeftDouble != null) {
             listener.validationPassed(assetName, assetCostDouble, salvageValueDouble, lifeYearsLeftDouble.intValue());
+        } else {
+            listener.validationFailed(message);
         }
 
-        listener.validationFailed(message);
+        setMessage("");
+
     }
 
     public String getMessage() {
@@ -34,13 +37,13 @@ public class AssetValidator {
     }
 
     private void setMessage(String message) {
-        this.message = message;
+        this.message += message;
     }
 
     private String checkEmptyName(String assetName) {
         if ("".equals(assetName)) {
             assetName = null;
-            setMessage("Asset name cannot be blank!");
+            setMessage("Asset name cannot be blank! \n");
         }
         return assetName;
     }
@@ -50,12 +53,12 @@ public class AssetValidator {
         try {
             parsedUserInput = Double.parseDouble(actualUserInput);
             if (parsedUserInput < 0) {
-                setMessage(inputField + " cannot be a negative number!");
+                setMessage(inputField + " cannot be a negative number! \n");
                 parsedUserInput = null;
             }
         } catch (NumberFormatException e) {
             parsedUserInput = null;
-            setMessage(inputField + " must be a number!");
+            setMessage(inputField + " must be a whole number! \n");
         }
 
         return parsedUserInput;

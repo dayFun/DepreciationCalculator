@@ -1,4 +1,4 @@
-package depCalc.presenter;
+package depCalc;
 
 import depCalc.listeners.IAssetEntryListener;
 import depCalc.model.Asset;
@@ -19,16 +19,11 @@ public class Presenter implements IAssetEntryListener {
 
     @Override
     public void handleClearButtonClicked() {
-
-
+        depCalcView.clearScreen();
     }
 
     @Override
-    public void handleCalculateButtonClicked(Asset asset) {
-    }
+    public void handleCalculateButtonClicked(Asset asset, String depreciationMethod) {
 
-    @Override
-    public char getDepreciationMethod() {
-        return 0;
     }
 }

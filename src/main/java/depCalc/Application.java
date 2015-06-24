@@ -2,7 +2,6 @@ package depCalc;
 
 import java.awt.EventQueue;
 
-import depCalc.presenter.Presenter;
 import depCalc.view.DepCalcView;
 
 public class Application {

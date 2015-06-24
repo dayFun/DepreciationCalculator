@@ -1,4 +1,4 @@
-package depCalc.utils;
+package depCalc;
 
 
 import static org.junit.Assert.assertEquals;
@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import depCalc.listeners.IAssetValidatorListener;
+
 
 
 public class AssetValidatorTest {
